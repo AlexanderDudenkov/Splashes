@@ -1,4 +1,4 @@
-package com.dudencovgmail.splashes.presentation.view
+package com.dudencovgmail.splashes.presentation.view.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.paging.PagedList
@@ -9,7 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.dudencovgmail.splashes.R
 import com.dudencovgmail.splashes.data.Model
-import com.dudencovgmail.splashes.presentation.viewmodels.ADetailViewModel
+import com.dudencovgmail.splashes.presentation.notview.base.ADetailViewModel
+import com.dudencovgmail.splashes.presentation.view.activities.DetailActivity
 import com.dudencovgmail.splashes.util.inflate
 import com.dudencovgmail.splashes.util.loadImage
 import kotlinx.android.synthetic.main.gallery_item.*

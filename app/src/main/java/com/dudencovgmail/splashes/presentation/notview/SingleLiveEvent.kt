@@ -13,13 +13,12 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.dudencovgmail.splashes.presentation.custom
+package com.dudencovgmail.splashes.presentation.notview
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.support.annotation.MainThread
-import android.util.Log
 import com.github.ajalt.timberkt.Timber.d
 
 import java.util.concurrent.atomic.AtomicBoolean

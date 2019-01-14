@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.dudencovgmail.splashes.util
+package com.dudencovgmail.splashes.presentation.notview.viewmodels
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.ViewModel
@@ -22,10 +22,7 @@ import android.support.annotation.VisibleForTesting
 import com.dudencovgmail.splashes.domain.Interactor
 import com.dudencovgmail.splashes.domain.ModelListMapper
 import com.dudencovgmail.splashes.domain.UseCases
-import com.dudencovgmail.splashes.presentation.viewmodels.AMainViewModel
 import com.dudencovgmail.splashes.repository.remote.Repository
-import com.dudencovgmail.splashes.presentation.viewmodels.DetailViewModel
-import com.dudencovgmail.splashes.presentation.viewmodels.MainViewModel
 
 /**
  * A creator is used to inject the product ID into the ViewModel
@@ -58,8 +55,10 @@ class ViewModelFactory private constructor(
         private var INSTANCE: ViewModelFactory? = null
 
         fun getInstance() =
-                INSTANCE ?: synchronized(ViewModelFactory::class.java) {
-                    INSTANCE ?: ViewModelFactory(Interactor(Repository, ModelListMapper()))
+                INSTANCE
+                        ?: synchronized(ViewModelFactory::class.java) {
+                    INSTANCE
+                            ?: ViewModelFactory(Interactor(Repository, ModelListMapper()))
                             .also { INSTANCE = it }
                 }
 

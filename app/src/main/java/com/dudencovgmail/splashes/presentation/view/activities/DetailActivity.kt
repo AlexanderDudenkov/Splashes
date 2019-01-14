@@ -1,14 +1,14 @@
-package com.dudencovgmail.splashes.presentation.view
+package com.dudencovgmail.splashes.presentation.view.activities
 
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.dudencovgmail.splashes.R
-import com.dudencovgmail.splashes.presentation.adapters.GalleryPagerAdapter
-import com.dudencovgmail.splashes.presentation.base.BaseActivity
-import com.dudencovgmail.splashes.presentation.viewmodels.ADetailViewModel
-import com.dudencovgmail.splashes.presentation.viewmodels.DetailViewModel
+import com.dudencovgmail.splashes.presentation.view.adapters.GalleryPagerAdapter
+import com.dudencovgmail.splashes.presentation.view.base.BaseActivity
+import com.dudencovgmail.splashes.presentation.notview.base.ADetailViewModel
+import com.dudencovgmail.splashes.presentation.notview.viewmodels.DetailViewModel
 import com.dudencovgmail.splashes.util.obtainViewModel
 import kotlinx.android.synthetic.main.activity_detail.*
 

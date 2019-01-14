@@ -26,6 +26,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
+import com.dudencovgmail.splashes.presentation.notview.viewmodels.ViewModelFactory
 
 //<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 fun Context.isOnline(): Boolean {

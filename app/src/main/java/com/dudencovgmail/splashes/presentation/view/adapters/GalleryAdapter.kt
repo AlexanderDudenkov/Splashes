@@ -1,4 +1,4 @@
-package com.dudencovgmail.splashes.presentation.adapters
+package com.dudencovgmail.splashes.presentation.view.adapters
 
 import android.arch.paging.PagedListAdapter
 import android.databinding.BindingAdapter

@@ -1,15 +1,7 @@
-package com.dudencovgmail.splashes.presentation.base
+package com.dudencovgmail.splashes.presentation.view.base
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
-import android.support.annotation.IdRes
-import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.view.View
-import android.view.inputmethod.InputMethodManager
-import com.dudencovgmail.splashes.R
-import com.dudencovgmail.splashes.util.key
 
 @SuppressLint("Registered")
 

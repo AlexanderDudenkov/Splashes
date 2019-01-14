@@ -1,8 +1,8 @@
-package com.dudencovgmail.splashes.presentation.adapters
+package com.dudencovgmail.splashes.presentation.view.adapters
 
 import com.dudencovgmail.splashes.data.Model
 import com.dudencovgmail.splashes.databinding.GalleryItemBinding
-import com.dudencovgmail.splashes.presentation.base.BaseViewHolder
+import com.dudencovgmail.splashes.presentation.view.base.BaseViewHolder
 
 class GalleryHolder(private val binding: GalleryItemBinding?,
                     clickedListener: ((Int) -> Unit)? = null)

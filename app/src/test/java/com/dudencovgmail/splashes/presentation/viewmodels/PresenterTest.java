@@ -2,6 +2,7 @@ package com.dudencovgmail.splashes.presentation.viewmodels;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.dudencovgmail.splashes.presentation.notview.viewmodels.MainViewModel;
 import com.dudencovgmail.splashes.repository.remote.models.response.ModelResponse;
 import com.dudencovgmail.splashes.repository.remote.NetConnection;
 import com.dudencovgmail.splashes.repository.remote.Repository;

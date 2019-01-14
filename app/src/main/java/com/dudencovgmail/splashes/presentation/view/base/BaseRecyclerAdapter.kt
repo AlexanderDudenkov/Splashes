@@ -1,4 +1,4 @@
-package com.dudencovgmail.splashes.presentation.base
+package com.dudencovgmail.splashes.presentation.view.base
 
 import android.support.v7.widget.RecyclerView
 

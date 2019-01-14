@@ -1,4 +1,4 @@
-package com.dudencovgmail.splashes.presentation.base
+package com.dudencovgmail.splashes.presentation.view.base
 
 import android.arch.paging.PagedList
 import android.support.v4.app.Fragment

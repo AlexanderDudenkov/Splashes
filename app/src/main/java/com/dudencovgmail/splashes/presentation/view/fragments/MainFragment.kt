@@ -1,4 +1,4 @@
-package com.dudencovgmail.splashes.presentation.view
+package com.dudencovgmail.splashes.presentation.view.fragments
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
@@ -11,8 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.dudencovgmail.splashes.R
 import com.dudencovgmail.splashes.data.Model
-import com.dudencovgmail.splashes.presentation.adapters.GalleryAdapter
-import com.dudencovgmail.splashes.presentation.viewmodels.AMainViewModel
+import com.dudencovgmail.splashes.presentation.view.adapters.GalleryAdapter
+import com.dudencovgmail.splashes.presentation.notview.base.AMainViewModel
+import com.dudencovgmail.splashes.presentation.view.activities.DetailActivity
+import com.dudencovgmail.splashes.presentation.view.activities.MainActivity
 import com.dudencovgmail.splashes.util.*
 import com.github.ajalt.timberkt.Timber.d
 import kotlinx.android.synthetic.main.fragment_gallery.*
