@@ -1,4 +1,4 @@
-package com.dudencovgmail.splashes.presentation.viewmodels
+package com.dudencovgmail.splashes.presentation.notview.viewmodels
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -7,14 +7,15 @@ import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
 import com.dudencovgmail.splashes.data.Model
 import com.dudencovgmail.splashes.domain.UseCases
-import com.dudencovgmail.splashes.presentation.adapters.DataSourceFactory
-import com.dudencovgmail.splashes.presentation.adapters.GalleryDataSource
+import com.dudencovgmail.splashes.presentation.notview.base.AMainFragmentViewModel
+import com.dudencovgmail.splashes.presentation.notview.paging.DataSourceFactory
+import com.dudencovgmail.splashes.presentation.notview.paging.GalleryDataSource
 import com.dudencovgmail.splashes.repository.remote.Repository
 import com.github.ajalt.timberkt.Timber.d
 import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.Executors
 
-class MainViewModel(interactor: UseCases) : AMainViewModel() {
+class MainFragmentViewModel(interactor: UseCases) : AMainFragmentViewModel() {
 
     private var compositeDisposable = CompositeDisposable()
     override var pagedList: LiveData<PagedList<Model>>? = null
@@ -45,7 +46,6 @@ class MainViewModel(interactor: UseCases) : AMainViewModel() {
         compositeDisposable.dispose()
         compositeDisposable.clear()
     }
-
 }
 
 

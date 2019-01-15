@@ -1,24 +1,26 @@
 package com.dudencovgmail.splashes.presentation.view.activities
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment.*
 import com.dudencovgmail.splashes.R
-import com.dudencovgmail.splashes.presentation.view.base.BaseActivity
-import com.dudencovgmail.splashes.presentation.notview.viewmodels.MainViewModel
-import com.dudencovgmail.splashes.presentation.view.fragments.MainFragment
+import com.dudencovgmail.splashes.presentation.notview.base.AMainFragmentViewModel
+import com.dudencovgmail.splashes.presentation.notview.viewmodels.MainFragmentViewModel
 import com.dudencovgmail.splashes.util.obtainViewModel
-import com.dudencovgmail.splashes.util.startFragmentAnim
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
+
+    var mainViewModel: AMainFragmentViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.common_activity)
-        setupViewFragment()
+        setContentView(R.layout.activity_main)
+
+        mainViewModel = obtainMainViewModel()
     }
 
-    private fun setupViewFragment() {
-        startFragmentAnim(MainFragment.newInstance(), R.id.fragmentContainer)
-    }
+    override fun onSupportNavigateUp() = findNavController(nav_host_fragment).navigateUp()
 
-    fun obtainViewModel(): MainViewModel = obtainViewModel(MainViewModel::class.java)
+    private fun obtainMainViewModel(): MainFragmentViewModel = obtainViewModel(MainFragmentViewModel::class.java)
 }

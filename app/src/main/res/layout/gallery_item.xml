@@ -13,13 +13,14 @@
 
     </data>
 
-    <ImageView
-        android:id="@+id/iv"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:scaleType="centerCrop"
-        app:photosUrl="@{model.photosUrl.urlMedium}" />
+        android:layout_height="120dp">
+
+        <include
+            layout="@layout/image_view"
+            app:url="@{model.photosUrl.urlMedium}" />
+    </FrameLayout>
 
 </layout>
 

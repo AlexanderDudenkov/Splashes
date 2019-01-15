@@ -5,7 +5,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.paging.PagedList
 import com.dudencovgmail.splashes.data.Model
 
-abstract class AMainViewModel : ViewModel() {
+abstract class AMainFragmentViewModel : ViewModel() {
 
     abstract var pagedList: LiveData<PagedList<Model>>?
     abstract var progress: LiveData<Boolean>

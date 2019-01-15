@@ -12,7 +12,7 @@ abstract class BaseViewHolder<T>(itemView: View, private val clickedListener: ((
     lateinit var recyclerView: RecyclerView
 
     init {
-        itemView.setOnClickListener { clickedListener?.invoke(adapterPosition) }
+        itemView.setOnClickListener { view -> clickedListener?.invoke(adapterPosition) }
     }
 
     constructor(parent: ViewGroup, itemView: View) : this(itemView) {

@@ -9,15 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import com.dudencovgmail.splashes.R
 import com.dudencovgmail.splashes.data.Model
-import com.dudencovgmail.splashes.presentation.notview.base.ADetailViewModel
-import com.dudencovgmail.splashes.presentation.view.activities.DetailActivity
+import com.dudencovgmail.splashes.presentation.notview.viewmodels.ItemViewPagerFrVM
+import com.dudencovgmail.splashes.presentation.view.activities.MainActivity
 import com.dudencovgmail.splashes.util.inflate
 import com.dudencovgmail.splashes.util.loadImage
-import kotlinx.android.synthetic.main.gallery_item.*
+import com.dudencovgmail.splashes.util.obtainViewModel
+import kotlinx.android.synthetic.main.image_view.*
 
-class DetailFragment : Fragment() {
+class ItemViewPagerFragment : Fragment() {
 
-    private var viewModel: ADetailViewModel? = null
+    var viewModel: ItemViewPagerFrVM? = null
     private var pagedList: PagedList<Model>? = null
     private var pos: Int = 0
 
@@ -29,14 +30,10 @@ class DetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = container?.inflate(R.layout.gallery_item)
-        viewModel = (activity as DetailActivity).obtainViewModel()
-        return view
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        val view = container?.inflate(R.layout.fragment_item_viewpager)
+        viewModel = obtainViewModel()
         getList()
+        return view
     }
 
     private fun getList() {
@@ -48,13 +45,16 @@ class DetailFragment : Fragment() {
         })
     }
 
+    private fun obtainViewModel(): ItemViewPagerFrVM =
+            (activity as MainActivity).obtainViewModel(ItemViewPagerFrVM::class.java)
+
     companion object {
         private const val ARG_ID = "id"
 
-        fun newInstance(pos: Int): DetailFragment {
+        fun newInstance(pos: Int): ItemViewPagerFragment {
             val args = Bundle()
             args.putInt(ARG_ID, pos)
-            val fragment = DetailFragment()
+            val fragment = ItemViewPagerFragment()
             fragment.arguments = args
             return fragment
         }

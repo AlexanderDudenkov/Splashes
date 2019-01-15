@@ -2,7 +2,7 @@ package com.dudencovgmail.splashes.presentation.viewmodels;
 
 import android.support.v7.widget.RecyclerView;
 
-import com.dudencovgmail.splashes.presentation.notview.viewmodels.MainViewModel;
+import com.dudencovgmail.splashes.presentation.notview.viewmodels.MainFragmentViewModel;
 import com.dudencovgmail.splashes.repository.remote.models.response.ModelResponse;
 import com.dudencovgmail.splashes.repository.remote.NetConnection;
 import com.dudencovgmail.splashes.repository.remote.Repository;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.validateMockitoUsage;
 import static org.mockito.Mockito.verify;
 
 public class PresenterTest {
-    private MainViewModel mPresenter;
+    private MainFragmentViewModel mPresenter;
     private RecyclerView mRecyclerViewMock;
     private ViewIF mViewIFMock;
     private Repository mRepositoryMock;
@@ -29,7 +29,7 @@ public class PresenterTest {
     @Before
     public void setUp() throws Exception {
         mRepositoryMock = mock(Repository.class);
-        mPresenter = new MainViewModel(mRepositoryMock);
+        mPresenter = new MainFragmentViewModel(mRepositoryMock);
         mRecyclerViewMock = mock(RecyclerView.class);
         mViewIFMock = mock(ViewIF.class);
         mNetConnectionMock = mock(NetConnection.class);

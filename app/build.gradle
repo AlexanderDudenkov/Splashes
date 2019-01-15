@@ -1,10 +1,8 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -79,6 +77,10 @@ dependencies {
 
     //Paging
     implementation "android.arch.paging:runtime:$pagingVersion"
+
+    //Navigation
+    implementation "android.arch.navigation:navigation-fragment:$navVersion"
+    implementation "android.arch.navigation:navigation-ui:$navVersion"
 }
 
 

@@ -38,11 +38,14 @@ class ViewModelFactory private constructor(
     override fun <T : ViewModel> create(modelClass: Class<T>) =
             with(modelClass) {
                 when {
-                    isAssignableFrom(MainViewModel::class.java) ->
-                        MainViewModel(interactor)
+                    isAssignableFrom(MainFragmentViewModel::class.java) ->
+                        MainFragmentViewModel(interactor)
 
-                    isAssignableFrom(DetailViewModel::class.java) ->
-                        DetailViewModel(interactor)
+                    isAssignableFrom(ViewPagerFragmentViewModel::class.java) ->
+                        ViewPagerFragmentViewModel(interactor)
+
+                    isAssignableFrom(ItemViewPagerFrVM::class.java) ->
+                        ItemViewPagerFrVM(interactor)
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }

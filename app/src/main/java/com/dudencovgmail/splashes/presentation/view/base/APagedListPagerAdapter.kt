@@ -1,14 +1,19 @@
 package com.dudencovgmail.splashes.presentation.view.base
 
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.LifecycleObserver
+import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.paging.PagedList
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
 
-abstract class APagedListPagerAdapter<T>(fm: FragmentManager,
-                                         private val pager: ViewPager,
-                                         private val startPos: Int? = 0) : FragmentStatePagerAdapter(fm) {
+abstract class APagedListPagerAdapter<T>(private val fm: FragmentManager,
+                                         private val pager: ViewPager?,
+                                         private val startPos: Int? = 0)
+    : FragmentStatePagerAdapter(fm), LifecycleObserver {
+
     var pagedList: PagedList<T>? = null
         private set
     private var callback = PagerCallback()
@@ -30,7 +35,7 @@ abstract class APagedListPagerAdapter<T>(fm: FragmentManager,
         this.pagedList?.removeWeakCallback(callback)
         this.pagedList = pagedList
         this.pagedList?.addWeakCallback(null, callback)
-        if (pager.adapter?.count ?: 0 > 0) {
+        if (pager?.adapter?.count ?: 0 > 0) {
             scrollFirstToPos()
         }
         notifyDataSetChanged()
@@ -57,7 +62,16 @@ abstract class APagedListPagerAdapter<T>(fm: FragmentManager,
     private fun scrollFirstToPos() {
         if (!isSecondTimes) {
             isSecondTimes = true
-            pager.setCurrentItem(startPos ?: 0, isSmoothScroll)
+            pager?.setCurrentItem(startPos ?: 0, isSmoothScroll)
         }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    private fun cleanStack() {
+        fm.beginTransaction()
+                .remove(fm.fragments.removeAt(fm.fragments.size-3))
+                .remove(fm.fragments.removeAt(fm.fragments.size-2))
+                .remove(fm.fragments.removeAt(fm.fragments.size-1))
+                .commit()
     }
 }
