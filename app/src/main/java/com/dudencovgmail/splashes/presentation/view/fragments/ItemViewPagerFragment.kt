@@ -9,16 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.dudencovgmail.splashes.R
 import com.dudencovgmail.splashes.data.Model
-import com.dudencovgmail.splashes.presentation.notview.viewmodels.ItemViewPagerFrVM
-import com.dudencovgmail.splashes.presentation.view.activities.MainActivity
+import com.dudencovgmail.splashes.presentation.notview.base.IViewPagerFragmentViewModel
 import com.dudencovgmail.splashes.util.inflate
 import com.dudencovgmail.splashes.util.loadImage
-import com.dudencovgmail.splashes.util.obtainViewModel
+import com.github.ajalt.timberkt.Timber.d
 import kotlinx.android.synthetic.main.image_view.*
 
 class ItemViewPagerFragment : Fragment() {
 
-    var viewModel: ItemViewPagerFrVM? = null
+    private var viewModel: IViewPagerFragmentViewModel? = null
     private var pagedList: PagedList<Model>? = null
     private var pos: Int = 0
 
@@ -31,22 +30,19 @@ class ItemViewPagerFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = container?.inflate(R.layout.fragment_item_viewpager)
-        viewModel = obtainViewModel()
+        viewModel = ViewPagerFragment.viewModel
         getList()
         return view
     }
 
     private fun getList() {
-        viewModel?.pagedList?.observe(this, Observer { items ->
-            pagedList = items
-            if (pagedList != null) {
-                iv.loadImage(pagedList!![pos]?.photosUrl?.urlMedium)
+        viewModel?.pagedList?.observe(this, Observer { pagedList ->
+            this.pagedList = pagedList
+            if (this.pagedList != null) {
+                iv.loadImage(this.pagedList!![pos]?.photosUrl?.urlMedium)
             }
         })
     }
-
-    private fun obtainViewModel(): ItemViewPagerFrVM =
-            (activity as MainActivity).obtainViewModel(ItemViewPagerFrVM::class.java)
 
     companion object {
         private const val ARG_ID = "id"

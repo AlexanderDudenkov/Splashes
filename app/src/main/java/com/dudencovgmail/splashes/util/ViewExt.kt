@@ -69,6 +69,8 @@ fun AppCompatActivity.setupActionBar(@IdRes toolbarId: Int, action: ActionBar.()
 fun <T : ViewModel> AppCompatActivity.obtainViewModel(viewModelClass: Class<T>) =
         ViewModelProviders.of(this, ViewModelFactory.getInstance()).get(viewModelClass)
 
+fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>) =
+        ViewModelProviders.of(this, ViewModelFactory.getInstance()).get(viewModelClass)
 
 private inline fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
     beginTransaction().apply {

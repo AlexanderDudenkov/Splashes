@@ -8,14 +8,19 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class Interactor(val repository: IRepository, private val mapper: IModelListMapper) : UseCases {
+class Interactor(val repository: IRepository, private val mapper: IModelListBuilder) : UseCases {
 
-    override fun getPhotos(page: Int, perPage: Int): Single<ArrayList<Model>> =
+    override fun getModelList() = repository.readModelList()
+
+    override fun getModelList(page: Int, perPage: Int): Single<ArrayList<Model>> =
             repository.getPhotos(SendModel(Constants.API_KEY, page, perPage))
                     .subscribeOn(Schedulers.io())
-                    .map { modelResponse -> mapper.getModelList(ArrayList(), modelResponse) }
+                    .map { modelListResponse ->
+                        mapper.getModelList(modelListResponse).also {
+                            repository.writeModelList(it)
+                        }
+                    }
                     .observeOn(AndroidSchedulers.mainThread())
-
 
 }
 

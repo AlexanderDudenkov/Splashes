@@ -2,11 +2,16 @@ package com.dudencovgmail.splashes.repository.local
 
 import com.dudencovgmail.splashes.data.Model
 
-class Cash private constructor() {
+object Cash : ILocal {
+    private var modelList = ArrayList<Model>()
 
-    var modelList: ArrayList<Model>? = null
+    override fun readModelList() = modelList
 
-    companion object {
-        val instance = Cash()
+    override fun writeModel(model: Model) {
+        modelList.add(model)
+    }
+
+    override fun writeModelList(list: ArrayList<Model>) {
+        modelList.addAll(list)
     }
 }

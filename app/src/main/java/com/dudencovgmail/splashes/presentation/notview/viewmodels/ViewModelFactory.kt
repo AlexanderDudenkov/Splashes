@@ -20,8 +20,10 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.support.annotation.VisibleForTesting
 import com.dudencovgmail.splashes.domain.Interactor
+import com.dudencovgmail.splashes.domain.ModelListBuilder
 import com.dudencovgmail.splashes.domain.ModelListMapper
 import com.dudencovgmail.splashes.domain.UseCases
+import com.dudencovgmail.splashes.repository.local.Cash
 import com.dudencovgmail.splashes.repository.remote.Repository
 
 /**
@@ -44,8 +46,8 @@ class ViewModelFactory private constructor(
                     isAssignableFrom(ViewPagerFragmentViewModel::class.java) ->
                         ViewPagerFragmentViewModel(interactor)
 
-                    isAssignableFrom(ItemViewPagerFrVM::class.java) ->
-                        ItemViewPagerFrVM(interactor)
+                    /*isAssignableFrom(ItemViewPagerFrVM::class.java) ->
+                        ItemViewPagerFrVM(interactor)*/
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }
@@ -58,11 +60,9 @@ class ViewModelFactory private constructor(
         private var INSTANCE: ViewModelFactory? = null
 
         fun getInstance() =
-                INSTANCE
-                        ?: synchronized(ViewModelFactory::class.java) {
-                    INSTANCE
-                            ?: ViewModelFactory(Interactor(Repository, ModelListMapper()))
-                            .also { INSTANCE = it }
+                INSTANCE ?: synchronized(ViewModelFactory::class.java) {
+                    INSTANCE ?: ViewModelFactory(Interactor(Repository.also { it.setDB(Cash) },
+                            ModelListBuilder())).also { INSTANCE = it }
                 }
 
         @VisibleForTesting

@@ -10,7 +10,7 @@ import com.dudencovgmail.splashes.repository.remote.models.response.UserResponse
 class ModelListMapper : IModelListMapper {
 
     override fun getModelList(modelList: ArrayList<Model>, list: ArrayList<ModelResponse>): ArrayList<Model> {
-        for (i in 0 until list.size - 1) {
+        for (i in 0 until list.size) {
             var model: Model?
             if (modelList.size < list.size) {
                 model = Model()

@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dudencovgmail.splashes.R
+import com.dudencovgmail.splashes.presentation.notview.base.IViewPagerFragmentViewModel
 import com.dudencovgmail.splashes.presentation.notview.viewmodels.ViewPagerFragmentViewModel
-import com.dudencovgmail.splashes.presentation.view.activities.MainActivity
 import com.dudencovgmail.splashes.presentation.view.adapters.GalleryPagerAdapter
 import com.dudencovgmail.splashes.util.inflate
 import com.dudencovgmail.splashes.util.obtainViewModel
@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.fragment_viewpager.*
 
 class ViewPagerFragment : Fragment() {
     private var position: Int = 0
-    var viewModel: ViewPagerFragmentViewModel? = null
     private var adapter: GalleryPagerAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -28,26 +27,38 @@ class ViewPagerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
+        adapter?.let { lifecycle.addObserver(adapter!!) }
         getList()
     }
 
+    override fun onDestroy() {
+        adapter?.let { lifecycle.removeObserver(adapter!!) }
+        super.onDestroy()
+    }
+
     private fun init() {
-        if (arguments != null) {
+        arguments?.let {
             val frArg = ViewPagerFragmentArgs.fromBundle(arguments!!)
             position = frArg.position
         }
         viewModel = obtainViewModel()
 
-        adapter = GalleryPagerAdapter(this, position)
-        view_pager.adapter = adapter
+        activity?.supportFragmentManager?.let {
+            adapter = GalleryPagerAdapter(this, position)
+            view_pager?.adapter = adapter
+        }
     }
 
     private fun getList() {
-        viewModel?.pagedList?.observe(this, Observer { items ->
-            adapter?.submitList(items)
+        viewModel?.pagedList?.observe(this, Observer { pagedList ->
+            adapter?.submitList(pagedList)
         })
     }
 
-    private fun obtainViewModel(): ViewPagerFragmentViewModel =
-            (activity as MainActivity).obtainViewModel(ViewPagerFragmentViewModel::class.java)
+    private fun obtainViewModel(): IViewPagerFragmentViewModel =
+            obtainViewModel(ViewPagerFragmentViewModel::class.java)
+
+    companion object {
+        var viewModel: IViewPagerFragmentViewModel? = null
+    }
 }

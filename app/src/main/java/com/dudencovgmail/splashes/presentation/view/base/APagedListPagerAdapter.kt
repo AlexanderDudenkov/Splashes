@@ -35,10 +35,12 @@ abstract class APagedListPagerAdapter<T>(private val fm: FragmentManager,
         this.pagedList?.removeWeakCallback(callback)
         this.pagedList = pagedList
         this.pagedList?.addWeakCallback(null, callback)
+
+        notifyDataSetChanged()
+
         if (pager?.adapter?.count ?: 0 > 0) {
             scrollFirstToPos()
         }
-        notifyDataSetChanged()
     }
 
     private inner class PagerCallback : PagedList.Callback() {
@@ -68,10 +70,17 @@ abstract class APagedListPagerAdapter<T>(private val fm: FragmentManager,
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     private fun cleanStack() {
-        fm.beginTransaction()
-                .remove(fm.fragments.removeAt(fm.fragments.size-3))
-                .remove(fm.fragments.removeAt(fm.fragments.size-2))
-                .remove(fm.fragments.removeAt(fm.fragments.size-1))
-                .commit()
+        if (startPos == 0 || pager?.currentItem == 0) {
+            fm.beginTransaction()
+                    .remove(fm.fragments.removeAt(fm.fragments.size - 2))
+                    .remove(fm.fragments.removeAt(fm.fragments.size - 1))
+                    .commit()
+        } else {
+            fm.beginTransaction()
+                    .remove(fm.fragments.removeAt(fm.fragments.size - 3))
+                    .remove(fm.fragments.removeAt(fm.fragments.size - 2))
+                    .remove(fm.fragments.removeAt(fm.fragments.size - 1))
+                    .commit()
+        }
     }
 }
