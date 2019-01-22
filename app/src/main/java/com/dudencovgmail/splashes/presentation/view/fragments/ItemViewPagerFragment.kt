@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.dudencovgmail.splashes.R
 import com.dudencovgmail.splashes.data.Model
 import com.dudencovgmail.splashes.presentation.notview.base.IViewPagerFragmentViewModel
+import com.dudencovgmail.splashes.util.generateRandomColor
 import com.dudencovgmail.splashes.util.inflate
 import com.dudencovgmail.splashes.util.loadImage
 import com.github.ajalt.timberkt.Timber.d
@@ -30,6 +31,7 @@ class ItemViewPagerFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = container?.inflate(R.layout.fragment_item_viewpager)
+        view?.setBackgroundColor(generateRandomColor())
         viewModel = ViewPagerFragment.viewModel
         getList()
         return view

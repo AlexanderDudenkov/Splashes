@@ -3,12 +3,12 @@ package com.dudencovgmail.splashes.presentation.view.adapters
 import android.arch.paging.PagedListAdapter
 import android.databinding.BindingAdapter
 import android.support.v7.util.DiffUtil
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.dudencovgmail.splashes.data.Model
 import com.dudencovgmail.splashes.databinding.GalleryItemBinding
 import com.dudencovgmail.splashes.util.SimpleItemDiffCallback
+import com.dudencovgmail.splashes.util.inflater
 import com.dudencovgmail.splashes.util.loadImage
 
 class GalleryAdapter(private val clickedListener: ((Int) -> Unit)? = null,
@@ -18,8 +18,7 @@ class GalleryAdapter(private val clickedListener: ((Int) -> Unit)? = null,
     private var binding: GalleryItemBinding? = null
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): GalleryHolder {
-        val inflater = LayoutInflater.from(viewGroup.context)
-        binding = GalleryItemBinding.inflate(inflater, viewGroup, false)
+        binding = GalleryItemBinding.inflate(viewGroup.inflater(), viewGroup, false)
         return GalleryHolder(binding, clickedListener)
     }
 

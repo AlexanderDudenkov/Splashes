@@ -18,6 +18,7 @@
         android:layout_height="120dp">
 
         <include
+            android:id="@+id/gallery_item_iv"
             layout="@layout/image_view"
             app:url="@{model.photosUrl.urlMedium}" />
     </FrameLayout>

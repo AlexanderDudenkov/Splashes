@@ -5,6 +5,11 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
+import android.databinding.ViewDataBinding
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.ConnectivityManager
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
@@ -125,9 +130,9 @@ fun Activity?.nextActivity(activityIntent: Intent) {
     this?.finish()
 }
 
-fun ViewGroup.inflate(layoutRes: Int): View {
-    return LayoutInflater.from(context).inflate(layoutRes, this, false)
-}
+fun ViewGroup.inflate(layoutRes: Int) = inflater().inflate(layoutRes, this, false)
+
+fun ViewGroup.inflater() = LayoutInflater.from(this.context)
 
 fun Fragment.key(): String {
     val key = Fragment::class.java.simpleName
@@ -139,10 +144,20 @@ fun ImageView.loadImage(url: String?) {
     if (!TextUtils.isEmpty(url)) {
         Picasso.with(this.context)
                 .load(url)
-                .placeholder(R.drawable.placeholder)
+                .noPlaceholder()
                 .into(this)
     }
 }
+
+fun View?.setBackgroundColorExt(colorResId: Int) {
+    this?.setBackgroundColor(this.getColor(colorResId)!!)
+}
+
+fun View?.setBackgroundColorExt(colorHex: String) {
+    this?.setBackgroundColorExt(Color.parseColor(colorHex))
+}
+
+fun View?.getColor(colorResId: Int) = this?.resources?.getColor(colorResId)
 
 fun ProgressBar?.showProgress(activity: Activity?, inProgress: Boolean) {
     this?.let {
