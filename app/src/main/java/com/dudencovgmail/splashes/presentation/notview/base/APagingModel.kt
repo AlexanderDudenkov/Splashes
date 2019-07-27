@@ -7,13 +7,13 @@ import android.arch.lifecycle.ViewModel
 import android.arch.paging.DataSource
 import android.arch.paging.PageKeyedDataSource
 import com.dudencovgmail.splashes.data.Model
-import com.dudencovgmail.splashes.domain.UseCases
+import com.dudencovgmail.splashes.domain.IUseCases
 import com.dudencovgmail.splashes.util.createDataSourceFactory
 import com.dudencovgmail.splashes.util.createPageKeyedDataSource
 import com.dudencovgmail.splashes.util.getPageToLoad
 import io.reactivex.disposables.CompositeDisposable
 
-abstract class APagingModel(val interactor: UseCases) : ViewModel() {
+abstract class APagingModel(val interactor: IUseCases) : ViewModel() {
 
     private var perPage = 10
     private var compositeDisposable = CompositeDisposable()

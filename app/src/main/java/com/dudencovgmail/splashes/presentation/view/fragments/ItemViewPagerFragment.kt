@@ -9,7 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.dudencovgmail.splashes.R
 import com.dudencovgmail.splashes.data.Model
+import com.dudencovgmail.splashes.domain.Interactor
+import com.dudencovgmail.splashes.domain.ModelListBuilder
 import com.dudencovgmail.splashes.presentation.notview.base.IViewPagerFragmentViewModel
+import com.dudencovgmail.splashes.presentation.notview.viewmodels.ViewPagerFragmentViewModel
+import com.dudencovgmail.splashes.presentation.view.activities.MainActivity
+import com.dudencovgmail.splashes.repository.Repository
 import com.dudencovgmail.splashes.util.generateRandomColor
 import com.dudencovgmail.splashes.util.inflate
 import com.dudencovgmail.splashes.util.loadImage
@@ -18,7 +23,7 @@ import kotlinx.android.synthetic.main.image_view.*
 
 class ItemViewPagerFragment : Fragment() {
 
-    private var viewModel: IViewPagerFragmentViewModel? = null
+    private val viewModel: IViewPagerFragmentViewModel by lazy { (activity as MainActivity).viewPagerVM }
     private var pagedList: PagedList<Model>? = null
     private var pos: Int = 0
 
@@ -32,13 +37,12 @@ class ItemViewPagerFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = container?.inflate(R.layout.fragment_item_viewpager)
         view?.setBackgroundColor(generateRandomColor())
-        viewModel = ViewPagerFragment.viewModel
         getList()
         return view
     }
 
     private fun getList() {
-        viewModel?.pagedList?.observe(this, Observer { pagedList ->
+        viewModel.pagedList?.observe(this, Observer { pagedList ->
             this.pagedList = pagedList
             if (this.pagedList != null) {
                 iv.loadImage(this.pagedList!![pos]?.photosUrl?.urlMedium)

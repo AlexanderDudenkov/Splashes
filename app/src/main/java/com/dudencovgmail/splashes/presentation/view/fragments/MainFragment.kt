@@ -9,19 +9,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation.findNavController
 import com.dudencovgmail.splashes.R
+import com.dudencovgmail.splashes.di.components.DaggerIMainFragmentComponent
+import com.dudencovgmail.splashes.di.components.IMainFragmentComponent
+import com.dudencovgmail.splashes.di.modules.MainFragmentModule
+import com.dudencovgmail.splashes.di.components.injector
 import com.dudencovgmail.splashes.presentation.notview.base.IMainFragmentViewModel
-import com.dudencovgmail.splashes.presentation.view.adapters.GalleryAdapter
 import com.dudencovgmail.splashes.presentation.view.activities.MainActivity
+import com.dudencovgmail.splashes.presentation.view.adapters.GalleryAdapter2
 import com.dudencovgmail.splashes.util.inflate
 import com.dudencovgmail.splashes.util.showProgress
 import com.dudencovgmail.splashes.util.toast
 import com.github.ajalt.timberkt.Timber.d
 import kotlinx.android.synthetic.main.fragment_main.*
+import javax.inject.Inject
 
 class MainFragment : Fragment() {
 
-    private var galleryAdapter: GalleryAdapter? = null
-    private var viewModel: IMainFragmentViewModel? = null
+    @Inject
+    lateinit var galleryAdapter: GalleryAdapter2
+    private var component: IMainFragmentComponent? = null
+    private val viewModel: IMainFragmentViewModel by lazy { (activity as MainActivity).mainViewVM }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,24 +37,37 @@ class MainFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = container?.inflate(R.layout.fragment_main)
-        viewModel = (activity as MainActivity).mainViewModel as IMainFragmentViewModel
 
-        return view
+        return container?.inflate(R.layout.fragment_main)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        initDi()
         showProgress()
         showError()
         init()
         getList()
     }
 
+    override fun onDestroy() {
+        component = null
+        super.onDestroy()
+    }
+
+    private fun initDi() {
+        component = DaggerIMainFragmentComponent.builder()
+                .iAppComponent((activity as MainActivity).injector)
+                .mainFragmentModule(MainFragmentModule(activity as MainActivity))
+                .build()
+                .apply { inject(this@MainFragment) }
+    }
+
     private fun init() {
         rv.layoutManager = GridLayoutManager(activity, 3)
 
-        galleryAdapter = GalleryAdapter({ pos: Int -> startViewPagerFragment(pos) })
+        galleryAdapter.setOnClickListener { pos: Int -> startViewPagerFragment(pos) }
         rv.adapter = galleryAdapter
     }
 
@@ -60,19 +80,19 @@ class MainFragment : Fragment() {
     }
 
     private fun showProgress() {
-        viewModel?.progress?.observe(this, Observer<Boolean> { t ->
+        viewModel.progress.observe(this, Observer<Boolean> { t ->
             pb_rv.showProgress(activity, t ?: false)
         })
     }
 
     private fun getList() {
-        viewModel?.pagedList?.observe(this, Observer { pagedList ->
-            galleryAdapter?.submitList(pagedList)
+        viewModel.pagedList?.observe(this, Observer { pagedList ->
+            galleryAdapter.submitList(pagedList)
         })
     }
 
     private fun showError() {
-        viewModel?.errorMessage?.observe(this, Observer { error ->
+        viewModel.errorMessage.observe(this, Observer { error ->
             context?.toast(error)
             d { error ?: "errorMessage" }
         })

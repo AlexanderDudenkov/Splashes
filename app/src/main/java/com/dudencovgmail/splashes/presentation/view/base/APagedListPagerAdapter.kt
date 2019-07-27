@@ -10,8 +10,7 @@ import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
 
 abstract class APagedListPagerAdapter<T>(private val fm: FragmentManager,
-                                         private val pager: ViewPager?,
-                                         private val startPos: Int? = 0)
+                                         private val pager: ViewPager?)
     : FragmentStatePagerAdapter(fm), LifecycleObserver {
 
     var pagedList: PagedList<T>? = null
@@ -25,6 +24,7 @@ abstract class APagedListPagerAdapter<T>(private val fm: FragmentManager,
     abstract fun createItem(position: Int): Fragment
 
     abstract var isSmoothScroll: Boolean
+    var startPos = 0
 
     override fun getItem(position: Int): Fragment {
         pagedList?.loadAround(position)

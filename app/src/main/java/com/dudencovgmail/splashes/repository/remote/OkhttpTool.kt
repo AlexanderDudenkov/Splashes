@@ -1,3 +1,4 @@
+/*
 package com.dudencovgmail.splashes.repository.remote
 
 import com.dudencovgmail.splashes.BuildConfig
@@ -22,7 +23,7 @@ object OkhttpTool {
         return okHttpClient.build()
     }
 
-    fun createHttpConnection(): ApiService {
+    fun createHttpConnection(): apiService {
         val gson = GsonBuilder()
                 .setLenient()
                 .create()
@@ -34,6 +35,6 @@ object OkhttpTool {
                 .client(createOkHttpClient())
                 .build()
 
-        return retrofit.create(ApiService::class.java)
+        return retrofit.create(apiService::class.java)
     }
-}
+}*/

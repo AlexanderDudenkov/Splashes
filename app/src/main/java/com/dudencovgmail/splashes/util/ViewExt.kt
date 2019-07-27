@@ -1,16 +1,9 @@
 package com.dudencovgmail.splashes.util
 
 import android.app.Activity
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
-import android.databinding.ViewDataBinding
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.net.ConnectivityManager
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.text.TextUtils
@@ -29,11 +22,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
-import com.dudencovgmail.splashes.presentation.notview.viewmodels.ViewModelFactory
 
-//<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+/*//<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 fun Context.isOnline(): Boolean {
     val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val netInfo = cm.activeNetworkInfo
@@ -43,7 +36,7 @@ fun Context.isOnline(): Boolean {
         toast("Check internet connection")
         false
     }
-}
+}*/
 
 fun Context.toast(message: String?) {
     message?.let {
@@ -71,11 +64,17 @@ fun AppCompatActivity.setupActionBar(@IdRes toolbarId: Int, action: ActionBar.()
     }
 }
 
-fun <T : ViewModel> AppCompatActivity.obtainViewModel(viewModelClass: Class<T>) =
-        ViewModelProviders.of(this, ViewModelFactory.getInstance()).get(viewModelClass)
+/*fun <T : ViewModel> AppCompatActivity.obtainViewModel(viewModelClass: Class<T>) =
+        ViewModelProviders.of(this, injector.mainViewModelFactory()).get(viewModelClass)
 
 fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>) =
-        ViewModelProviders.of(this, ViewModelFactory.getInstance()).get(viewModelClass)
+        ViewModelProviders.of(this, this.activity!!.injector.mainViewModelFactory()).get(viewModelClass)*/
+
+/*fun <T : ViewModel> AppCompatActivity.obtainViewModel(viewModelClass: Class<T>) =
+        ViewModelProviders.of(this, ViewModelFactoryOld.getInstance()).get(viewModelClass)
+
+fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>) =
+        ViewModelProviders.of(this, ViewModelFactoryOld.getInstance()).get(viewModelClass)*/
 
 private inline fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
     beginTransaction().apply {
@@ -142,7 +141,7 @@ fun Fragment.key(): String {
 
 fun ImageView.loadImage(url: String?) {
     if (!TextUtils.isEmpty(url)) {
-        Picasso.with(this.context)
+        Picasso.get()
                 .load(url)
                 .noPlaceholder()
                 .into(this)
@@ -157,7 +156,7 @@ fun View?.setBackgroundColorExt(colorHex: String) {
     this?.setBackgroundColorExt(Color.parseColor(colorHex))
 }
 
-fun View?.getColor(colorResId: Int) = this?.resources?.getColor(colorResId)
+fun View?.getColor(colorResId: Int) = this?.let { ContextCompat.getColor(it.context, colorResId) }
 
 fun ProgressBar?.showProgress(activity: Activity?, inProgress: Boolean) {
     this?.let {

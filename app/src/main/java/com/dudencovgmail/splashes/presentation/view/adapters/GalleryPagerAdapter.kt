@@ -7,8 +7,8 @@ import com.dudencovgmail.splashes.presentation.view.fragments.ItemViewPagerFragm
 import com.dudencovgmail.splashes.presentation.view.fragments.ViewPagerFragment
 import kotlinx.android.synthetic.main.fragment_viewpager.*
 
-class GalleryPagerAdapter(fr:ViewPagerFragment, startPos: Int? = 0)
-    : APagedListPagerAdapter<Model>(fr.activity?.supportFragmentManager!!, fr.view_pager, startPos) {
+class GalleryPagerAdapter(fr: ViewPagerFragment)
+    : APagedListPagerAdapter<Model>(fr.activity?.supportFragmentManager!!, fr.view_pager) {
 
     override var isSmoothScroll = false
 
@@ -16,4 +16,7 @@ class GalleryPagerAdapter(fr:ViewPagerFragment, startPos: Int? = 0)
         return ItemViewPagerFragment.newInstance(position)
     }
 
+    fun setPos(pos: Int) {
+        startPos = pos
+    }
 }

@@ -1,31 +1,30 @@
 package com.dudencovgmail.splashes.presentation
 
-import android.content.Context
 import android.support.multidex.MultiDexApplication
 import com.dudencovgmail.splashes.BuildConfig
-import com.dudencovgmail.splashes.util.isOnline
+import com.dudencovgmail.splashes.di.components.DaggerIAppComponent
+import com.dudencovgmail.splashes.di.components.IAppComponent
+import com.dudencovgmail.splashes.di.components.IDaggerComponentProvider
 import timber.log.Timber
 
-class App : MultiDexApplication() {
+class App : MultiDexApplication(), IDaggerComponentProvider {
+
+    override val component: IAppComponent by lazy {
+        DaggerIAppComponent.builder().applicationContext(applicationContext).build()
+    }
 
     override fun onCreate() {
         super.onCreate()
         instance = this
+       // Realm.init(this)
         initTimberkt()
-        isOnline = appContext().isOnline()
     }
 
     private fun initTimberkt() {
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
+        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
     }
 
     companion object {
-        var isOnline: Boolean? = null
-        private var instance: App? = null
-        fun appContext(): Context {
-            return instance!!.applicationContext
-        }
+        var instance: App? = null
     }
 }

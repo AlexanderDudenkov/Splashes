@@ -2,7 +2,7 @@ package com.dudencovgmail.splashes.repository.local
 
 import com.dudencovgmail.splashes.data.Model
 
-object Cash : ILocal {
+class Cash :IDb{
     private var modelList = ArrayList<Model>()
 
     override fun readModelList() = modelList

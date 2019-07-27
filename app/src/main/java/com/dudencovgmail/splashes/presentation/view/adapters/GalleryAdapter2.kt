@@ -11,10 +11,10 @@ import com.dudencovgmail.splashes.util.SimpleItemDiffCallback
 import com.dudencovgmail.splashes.util.inflater
 import com.dudencovgmail.splashes.util.loadImage
 
-class GalleryAdapter(private val clickedListener: ((Int) -> Unit)? = null,
-                     itemDiffCallback: DiffUtil.ItemCallback<Model> = SimpleItemDiffCallback())
+class GalleryAdapter2(itemDiffCallback: DiffUtil.ItemCallback<Model> = SimpleItemDiffCallback())
     : PagedListAdapter<Model, GalleryHolder>(itemDiffCallback) {
 
+    private var clickedListener: ((Int) -> Unit)? = null
     private var binding: GalleryItemBinding? = null
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): GalleryHolder {
@@ -24,6 +24,10 @@ class GalleryAdapter(private val clickedListener: ((Int) -> Unit)? = null,
 
     override fun onBindViewHolder(holder: GalleryHolder, position: Int) {
         holder.bindData(getItem(position))
+    }
+
+    fun setOnClickListener(listener: (Int) -> Unit) {
+        clickedListener = listener
     }
 
     companion object {
