@@ -46,7 +46,7 @@ fun <T> ViewModel.createPageKeyedDataSource(
         }
 
         override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, T>) {
-            loadBefore?.let { loadBefore.invoke(params, callback) }
+            loadBefore?.invoke(params, callback)
         }
     }
 }

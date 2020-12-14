@@ -2,15 +2,15 @@ package com.dudencovgmail.splashes.presentation
 
 import android.support.multidex.MultiDexApplication
 import com.dudencovgmail.splashes.BuildConfig
-import com.dudencovgmail.splashes.di.components.DaggerIAppComponent
-import com.dudencovgmail.splashes.di.components.IAppComponent
-import com.dudencovgmail.splashes.di.components.IDaggerComponentProvider
+import com.dudencovgmail.splashes.di.components.DaggerAppComponent
+import com.dudencovgmail.splashes.di.components.AppComponent
+import com.dudencovgmail.splashes.di.components.DaggerComponentProvider
 import timber.log.Timber
 
-class App : MultiDexApplication(), IDaggerComponentProvider {
+class App : MultiDexApplication(), DaggerComponentProvider {
 
-    override val component: IAppComponent by lazy {
-        DaggerIAppComponent.builder().applicationContext(applicationContext).build()
+    override val component: AppComponent by lazy {
+        DaggerAppComponent.builder().applicationContext(applicationContext).build()
     }
 
     override fun onCreate() {

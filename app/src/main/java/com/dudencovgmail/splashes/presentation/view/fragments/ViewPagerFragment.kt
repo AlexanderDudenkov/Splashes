@@ -48,7 +48,7 @@ class ViewPagerFragment : Fragment() {
 
     private fun initDi() {
         component = DaggerIViewPagerFragmentComponent.builder()
-                .iAppComponent((activity as MainActivity).injector)
+                .appComponent((activity as MainActivity).injector)
                 .viewPagerFragmentModule(ViewPagerFragmentModule(this))
                 .build()
                 .apply { inject(this@ViewPagerFragment) }

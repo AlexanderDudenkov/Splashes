@@ -11,14 +11,14 @@ import dagger.Component
 
 @ApplicationScope
 @Component(modules = [AppModule::class])
-interface IAppComponent {
+interface AppComponent {
 
     @Component.Builder
     interface Builder {
         @BindsInstance
         fun applicationContext(applicationContext: Context): Builder
 
-        fun build(): IAppComponent
+        fun build(): AppComponent
     }
 
     fun mainViewModelFactory(): ViewModelFactory<MainFragmentViewModel>

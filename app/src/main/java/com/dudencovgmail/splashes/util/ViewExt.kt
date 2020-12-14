@@ -6,11 +6,19 @@ import android.content.Intent
 import android.graphics.Color
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.ActionBar
+import android.support.v7.app.AppCompatActivity
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -19,12 +27,6 @@ import com.github.ajalt.timberkt.Timber.d
 import com.squareup.picasso.Picasso
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.ActionBar
-import android.support.v7.app.AppCompatActivity
 
 /*//<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 fun Context.isOnline(): Boolean {
@@ -89,7 +91,7 @@ fun AppCompatActivity?.startFragment(fragment: Fragment,
                                      enterPopAnimRes: Int = enterAnimRes,
                                      exitPopAnimRes: Int = exitAnimRes) {
 
-    this?.supportFragmentManager?.findFragmentByTag(key(fragment))
+    this?.supportFragmentManager?.findFragmentByTag(fragment.getKey())
             ?: this?.supportFragmentManager?.beginTransaction()
                     ?.setCustomAnimations(enterAnimRes, exitAnimRes, enterPopAnimRes, exitPopAnimRes)
                     ?.replace(containerViewId, fragment)
@@ -108,8 +110,8 @@ fun AppCompatActivity?.startFragmentAnim(fragment: Fragment,
             R.anim.exit_to_right)
 }
 
-fun Activity.key(fragment: Fragment): String {
-    val key = fragment::class.java.simpleName
+fun Fragment.getKey(): String {
+    val key = this::class.java.simpleName
     d { "Activity.key: $key" }
     return key
 }
@@ -132,12 +134,6 @@ fun Activity?.nextActivity(activityIntent: Intent) {
 fun ViewGroup.inflate(layoutRes: Int) = inflater().inflate(layoutRes, this, false)
 
 fun ViewGroup.inflater() = LayoutInflater.from(this.context)
-
-fun Fragment.key(): String {
-    val key = Fragment::class.java.simpleName
-    d { "Fragment.key: $key" }
-    return key
-}
 
 fun ImageView.loadImage(url: String?) {
     if (!TextUtils.isEmpty(url)) {
@@ -170,5 +166,29 @@ fun ProgressBar?.showProgress(activity: Activity?, inProgress: Boolean) {
                         it.visibility = View.GONE
                 }
     }
+
+}
+
+fun EditText?.addTextChangedListener(before: ((s: CharSequence?, start: Int, count: Int, after: Int) -> Unit)? = null,
+                                     onText: ((s: CharSequence?, start: Int, before: Int, count: Int) -> Unit)? = null,
+                                     after: ((s: Editable?) -> Unit)? = null) {
+
+    this?.addTextChangedListener(object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            before?.invoke(s, start, count, after)
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            onText?.invoke(s, start, before, count)
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            after?.invoke(s)
+        }
+    })
+}
+
+fun EditText?.removeTextChangedListener() {
+    this?.addTextChangedListener(null)
 }
 

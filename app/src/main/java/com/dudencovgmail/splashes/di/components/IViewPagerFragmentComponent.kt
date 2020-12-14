@@ -6,7 +6,7 @@ import com.dudencovgmail.splashes.presentation.view.fragments.ViewPagerFragment
 import dagger.Component
 
 @FragmentScope
-@Component(modules = [ViewPagerFragmentModule::class], dependencies = [IAppComponent::class])
+@Component(modules = [ViewPagerFragmentModule::class], dependencies = [AppComponent::class])
 interface IViewPagerFragmentComponent {
     fun inject(fragment: ViewPagerFragment)
 }

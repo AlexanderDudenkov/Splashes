@@ -6,7 +6,7 @@ import com.dudencovgmail.splashes.presentation.view.fragments.MainFragment
 import dagger.Component
 
 @FragmentScope
-@Component(modules = [MainFragmentModule::class], dependencies = [IAppComponent::class])
+@Component(modules = [MainFragmentModule::class], dependencies = [AppComponent::class])
 interface IMainFragmentComponent {
     fun inject(mainFragment: MainFragment)
 }

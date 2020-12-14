@@ -11,8 +11,8 @@ import androidx.navigation.Navigation.findNavController
 import com.dudencovgmail.splashes.R
 import com.dudencovgmail.splashes.di.components.DaggerIMainFragmentComponent
 import com.dudencovgmail.splashes.di.components.IMainFragmentComponent
-import com.dudencovgmail.splashes.di.modules.MainFragmentModule
 import com.dudencovgmail.splashes.di.components.injector
+import com.dudencovgmail.splashes.di.modules.MainFragmentModule
 import com.dudencovgmail.splashes.presentation.notview.base.IMainFragmentViewModel
 import com.dudencovgmail.splashes.presentation.view.activities.MainActivity
 import com.dudencovgmail.splashes.presentation.view.adapters.GalleryAdapter2
@@ -58,7 +58,7 @@ class MainFragment : Fragment() {
 
     private fun initDi() {
         component = DaggerIMainFragmentComponent.builder()
-                .iAppComponent((activity as MainActivity).injector)
+                .appComponent((activity as MainActivity).injector)
                 .mainFragmentModule(MainFragmentModule(activity as MainActivity))
                 .build()
                 .apply { inject(this@MainFragment) }
