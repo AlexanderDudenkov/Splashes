@@ -1,6 +1,7 @@
-package com.dudencovgmail.splashes.presentation.view.activities
+package com.dudencovgmail.splashes.presentation.ui.activities
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.dudencovgmail.splashes.R
 import dagger.hilt.android.AndroidEntryPoint

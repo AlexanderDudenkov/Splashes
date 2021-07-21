@@ -11,7 +11,6 @@ class App : Application() {
         instance = this
     }
 
-
     companion object {
         var instance: App? = null
     }
