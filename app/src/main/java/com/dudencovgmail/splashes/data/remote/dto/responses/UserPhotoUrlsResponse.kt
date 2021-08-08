@@ -1,8 +1,8 @@
-package com.dudencovgmail.splashes.data.dto.responses
+package com.dudencovgmail.splashes.data.remote.dto.responses
 
 import com.google.gson.annotations.SerializedName
 
-class UserPhotoUrls {
+class UserPhotoUrlsResponse {
     @SerializedName("full")
     val urlLarge: String? = null
 

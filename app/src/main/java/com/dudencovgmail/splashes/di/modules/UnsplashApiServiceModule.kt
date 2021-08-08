@@ -1,7 +1,7 @@
 package com.dudencovgmail.splashes.di.modules
 
-import com.dudencovgmail.splashes.data.UnsplashApiService
-import com.dudencovgmail.splashes.data.utils.Constants
+import com.dudencovgmail.splashes.data.remote.UnsplashApiService
+import com.dudencovgmail.splashes.data.remote.utils.Constants
 import com.dudencovgmail.splashes.di.annotations.UnsplashRetrofit
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory

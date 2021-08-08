@@ -3,10 +3,11 @@ package com.dudencovgmail.splashes.presentation.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dudencovgmail.splashes.data.dto.responses.UserPhoto
+import com.dudencovgmail.splashes.data.local.dto.UserPhoto
 import com.dudencovgmail.splashes.databinding.ItemBinding
+import javax.inject.Inject
 
-class Adapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class Adapter @Inject constructor() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var binding2: ItemBinding
 
     var list: List<UserPhoto> = ArrayList()
@@ -27,7 +28,7 @@ class Adapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        binding2.url = list[position].photosUrls?.urlSmall
+        binding2.url = list[position].photosUrls.urlSmall
     }
 
     override fun getItemCount(): Int = list.size

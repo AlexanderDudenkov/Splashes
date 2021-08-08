@@ -1,4 +1,4 @@
-package com.dudencovgmail.splashes.data.utils
+package com.dudencovgmail.splashes.data.remote.utils
 
 object Constants {
     const val BASE_URL = "https://api.unsplash.com/"

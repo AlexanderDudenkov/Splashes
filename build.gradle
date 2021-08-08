@@ -3,16 +3,16 @@
 ext {
     minSdkVersion = 21
     targetSdkVersion = 28
-    compileSdkVersion = 29
+    compileSdkVersion = 30
 
-    navigationVersion = '2.4.0-alpha03'
+    navigationVersion = '2.4.0-alpha06'
     okhttp3Version = '5.0.0-alpha.2'
     gsonVersion = '2.8.7'
     retrofit2Version = '2.9.0'
 }
 
 buildscript {
-    ext.kotlinVersion = '1.4.32'
+    ext.kotlinVersion = '1.5.0'
     ext.buildGradleVersion = '4.2.1'
     ext.hiltVersion = '2.37'
     ext.navVersion = '1.0.0'

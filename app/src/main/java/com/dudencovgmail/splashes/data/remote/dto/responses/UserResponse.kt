@@ -1,8 +1,8 @@
-package com.dudencovgmail.splashes.data.dto.responses
+package com.dudencovgmail.splashes.data.remote.dto.responses
 
 import com.google.gson.annotations.SerializedName
 
-class User {
+class UserResponse {
     @SerializedName("name")
     val name: String? = null
 

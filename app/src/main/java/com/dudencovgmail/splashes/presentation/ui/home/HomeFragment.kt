@@ -12,9 +12,13 @@ import com.dudencovgmail.splashes.databinding.FragmentHomeBinding
 import com.dudencovgmail.splashes.presentation.ui.Adapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
+
+    @Inject
+    lateinit var adapter: Adapter
 
     private val viewModel: HomeViewModel by hiltNavGraphViewModels(R.id.nav_graph)
     private lateinit var binding: FragmentHomeBinding
@@ -28,7 +32,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = Adapter()
         binding.rv.adapter = adapter
 
         lifecycleScope.launchWhenCreated {
