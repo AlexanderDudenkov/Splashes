@@ -16,5 +16,5 @@ object DataStoreModule {
 
     @Provides
     @Singleton
-    fun provideUserPhotosStore(context: Context): DataStore<ArrayList<UserPhoto>> = context.userPhotos
+    fun provideUserPhotosStore(context: Context): DataStore<List<UserPhoto>> = context.userPhotos
 }

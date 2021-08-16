@@ -11,5 +11,5 @@ interface UnsplashApiService {
         @Query("client_id") key: String,
         @Query("page") currentPage: Int,
         @Query("per_page") perPage: Int
-    ): ArrayList<UserPhotoResponse>
+    ): List<UserPhotoResponse>
 }

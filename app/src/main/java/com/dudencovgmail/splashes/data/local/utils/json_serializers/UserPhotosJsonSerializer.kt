@@ -15,10 +15,10 @@ val Context.userPhotos by dataStore("userPhotosDataStore", UserPhotosJsonSeriali
 
 class UserPhotosJsonSerializer(
     val gson: Gson = Gson(),
-    override val defaultValue: ArrayList<UserPhoto> = ArrayList(),
-) : Serializer<ArrayList<UserPhoto>> {
+    override val defaultValue: List<UserPhoto> = emptyList(),
+) : Serializer<List<UserPhoto>> {
 
-    override suspend fun readFrom(input: InputStream): ArrayList<UserPhoto> {
+    override suspend fun readFrom(input: InputStream): List<UserPhoto> {
         try {
             val json: String = input.readBytes().decodeToString()
             return gson.fromJsonExt(json, defaultValue)
@@ -27,7 +27,7 @@ class UserPhotosJsonSerializer(
         }
     }
 
-    override suspend fun writeTo(t: ArrayList<UserPhoto>, output: OutputStream) {
+    override suspend fun writeTo(t: List<UserPhoto>, output: OutputStream) {
         val bytes = gson.toJson(t).encodeToByteArray()
         kotlin.runCatching {
             output.write(bytes)
