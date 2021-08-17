@@ -7,25 +7,15 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
 }
 
-val kotlinVersion = "1.5.0"
-val navigationVersion = "2.4.0-alpha06"
-val okhttp3Version = "5.0.0-alpha.2"
-val gsonVersion = "2.8.7"
-val retrofit2Version = "2.9.0"
-val hiltVersion = "2.38.1"
-
 android {
-    val minSdkVersion = 21
-    val targetSdkVersion = 28
-    val compileSdkVersion = 30
+    compileSdk = Versions.COMPILE_SDK
 
-    compileSdk = compileSdkVersion
     defaultConfig {
         applicationId = "com.dudencovgmail.splashes"
-        minSdk = minSdkVersion
-        targetSdk = targetSdkVersion
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = Versions.MIN_SDK
+        targetSdk = Versions.TARGET_SDK
+        versionCode = Versions.VERSION_CODE
+        versionName = Versions.VERSION_NAME
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
     }
@@ -54,50 +44,48 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion")
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.annotation:annotation:1.2.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    testImplementation("androidx.test.espresso:espresso-contrib:3.4.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.KOTLIN}")
+    implementation("androidx.recyclerview:recyclerview:${Versions.RECYCLER_VIEW}")
+    implementation("androidx.legacy:legacy-support-v4:${Versions.LEGACY_SUPPORT_V4}")
+    implementation("androidx.annotation:annotation:${Versions.ANNOTATION}")
+    implementation("androidx.appcompat:appcompat:${Versions.APPCOMPAT}")
+    testImplementation("androidx.test.espresso:espresso-contrib:${Versions.ESPRESSO_CONTRIB}")
+    testImplementation("junit:junit:${Versions.JUNIT}")
+    androidTestImplementation("androidx.test.ext:junit:${Versions.ANDROIDX_JUNIT}")
+    androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.ESPRESSO_CORE}")
 
     //Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.COROUTINES}")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.COROUTINES}")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.RETROFIT_COROUTINES}")
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-compiler:$hiltVersion")
-    implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
+    implementation("com.google.dagger:hilt-android:${Versions.HILT}")
+    kapt("com.google.dagger:hilt-compiler:${Versions.HILT}")
+    implementation("androidx.hilt:hilt-navigation-fragment:${Versions.HILT_NAVIGATION_FRAGMENT}")
 
     //Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
+    implementation("androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}")
+    implementation("androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}")
 
     //okhttp3
-    implementation("com.squareup.okhttp3:okhttp:$okhttp3Version")
-    implementation("com.squareup.okhttp3:logging-interceptor:$okhttp3Version")
+    implementation("com.squareup.okhttp3:okhttp:${Versions.OKHTTP}")
+    implementation("com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP}")
 
     //gson
-    implementation("com.google.code.gson:gson:$gsonVersion")
+    implementation("com.google.code.gson:gson:${Versions.GSON}")
 
     //retrofit2
-    implementation("com.squareup.retrofit2:retrofit:$retrofit2Version")
-    implementation("com.squareup.retrofit2:converter-gson:$retrofit2Version")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofit2Version")
+    implementation("com.squareup.retrofit2:retrofit:${Versions.RETROFIT}")
+    implementation("com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:${Versions.RETROFIT}")
 
     //picasso
-    implementation("com.squareup.picasso:picasso:2.71828")
+    implementation("com.squareup.picasso:picasso:${Versions.PICASSO}")
 
     //datastore
-    implementation("androidx.datastore:datastore-preferences-core:1.0.0")
-    implementation("androidx.datastore:datastore-core:1.0.0")
-    implementation("androidx.datastore:datastore:1.0.0")
+    implementation("androidx.datastore:datastore-preferences-core:${Versions.DATASTORE}")
+    implementation("androidx.datastore:datastore-core:${Versions.DATASTORE}")
+    implementation("androidx.datastore:datastore:${Versions.DATASTORE}")
 }
-
-
